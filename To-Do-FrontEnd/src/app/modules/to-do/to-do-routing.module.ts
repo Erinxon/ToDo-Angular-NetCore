@@ -7,16 +7,13 @@ const routes: Routes = [
   {
     path: '',
     component: TasksComponent,
-    pathMatch: 'full'
   }
 ];
-
 
 @NgModule({
   declarations: [],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
   ],
   exports: [RouterModule]
 })

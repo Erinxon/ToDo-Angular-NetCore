@@ -5660,23 +5660,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Erinxon\\.nuget\\packages\\": {},
+    "C:\\Users\\esantana\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Erinxon\\Desktop\\Proyectos\\to-do\\To-Do-BackEnd\\To-Do-BackEnd.csproj",
+      "projectUniqueName": "C:\\Users\\esantana\\Desktop\\Ejercicios\\ToDo-Angular-NetCore\\To-Do-BackEnd\\To-Do-BackEnd.csproj",
       "projectName": "To-Do-BackEnd",
-      "projectPath": "C:\\Users\\Erinxon\\Desktop\\Proyectos\\to-do\\To-Do-BackEnd\\To-Do-BackEnd.csproj",
-      "packagesPath": "C:\\Users\\Erinxon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Erinxon\\Desktop\\Proyectos\\to-do\\To-Do-BackEnd\\obj\\",
+      "projectPath": "C:\\Users\\esantana\\Desktop\\Ejercicios\\ToDo-Angular-NetCore\\To-Do-BackEnd\\To-Do-BackEnd.csproj",
+      "packagesPath": "C:\\Users\\esantana\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\esantana\\Desktop\\Ejercicios\\ToDo-Angular-NetCore\\To-Do-BackEnd\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Erinxon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\esantana\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

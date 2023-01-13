@@ -20,10 +20,11 @@ namespace To_Do_BackEnd.Models
         public virtual DbSet<ToDo> ToDos { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ViewTodo> ViewTodos { get; set; }
+        public virtual DbSet<ViewUser> ViewUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
- 
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,12 +54,12 @@ namespace To_Do_BackEnd.Models
                     .WithMany(p => p.ToDos)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ToDo__UserId__47DBAE45");
+                    .HasConstraintName("FK__ToDo__UserId__3E52440B");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Users__A9D1053455EE3624")
+                entity.HasIndex(e => e.Email, "UQ__Users__A9D10534BFBA74DA")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasDefaultValueSql("(newid())");
@@ -115,6 +116,35 @@ namespace To_Do_BackEnd.Models
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ViewUser>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("View_User");
+
+                entity.Property(e => e.CreateDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(256)
                     .IsUnicode(false);
             });
 

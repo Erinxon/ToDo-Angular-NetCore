@@ -34,7 +34,9 @@ as
 select T.*,U.FirstName,U.LastName from ToDo as T
 inner join Users as U on T.UserId = U.UserId
 
-alter procedure Sp_GetToDo
+
+
+create procedure Sp_GetToDo
 @UserId UNIQUEIDENTIFIER = null,
 @PageNumber int = 1,
 @PageSize int = 10,
@@ -59,14 +61,24 @@ begin
 	end
 end
 
+create view View_User
+as
+select * from Users
+
+alter procedure Sp_Login
+@Email varchar(250),
+@Password varchar(256)
+as
+begin
+	select * from View_User where Email = @Email and Password = @Password
+end
+
 select * from ToDo
 where TodoId = CAST('3fa85f64-5717-4562-b3fc-2c963f66afa6' as UNIQUEIDENTIFIER)
 
-/*
 declare @count int = 0
-WHILE(@count <= 1000000) BEGIN
+WHILE(@count <= 500) BEGIN
 	insert into ToDo(Name, Description, UserId)
-	values('Compra: ' + CAST(@count as varchar(100)),'Compra: ' + CAST(@count as varchar(100)),'E398C0AA-F147-4892-8CFB-6111C2CFDC0F')
+	values('Task: ' + CAST(@count as varchar(100)),'Task: ' + CAST(@count as varchar(100)),'c3a0cb1c-2092-43ab-9ed5-dea181dc12e5')
     set @count = @count + 1
 END
-*/

@@ -10,6 +10,8 @@ namespace To_Do_BackEnd.AutoMapperConfig
         {
             CreateMap<ToDo, SetTodoDto>();
             CreateMap<SetTodoDto, ToDo>();
+            CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>();
         }
     }
 }

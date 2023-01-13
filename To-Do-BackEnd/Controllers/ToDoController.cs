@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace To_Do_BackEnd.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
+    [Authorize]
     public class ToDoController : ControllerBase
     {
         private readonly ITodoServices todoServices;
