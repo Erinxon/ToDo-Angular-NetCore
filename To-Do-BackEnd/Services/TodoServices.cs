@@ -10,6 +10,7 @@ namespace To_Do_BackEnd.Services
     {
         Task<IEnumerable<ViewTodo>> GetTasks(Guid UserId, int pageNumber, int pageSize, int type);
         Task<Guid> AddTask(ToDo toDo);
+        Task<Guid> UpdateTask(ToDo toDo);
     }
 
     public class TodoServices : ITodoServices
@@ -33,5 +34,11 @@ namespace To_Do_BackEnd.Services
             return toDo.ToDoId;
         }
 
+        public async Task<Guid> UpdateTask(ToDo toDo)
+        {
+            this.toDoDbContext.Entry(toDo).State = EntityState.Modified;
+            await this.toDoDbContext.SaveChangesAsync();
+            return toDo.ToDoId;
+        }
     }
 }

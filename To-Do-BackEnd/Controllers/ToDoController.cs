@@ -51,7 +51,7 @@ namespace To_Do_BackEnd.Controllers
             {
                 var task = this.mapper.Map<ToDo>(setTodoDto);
                 task.ToDoId = Guid.NewGuid();
-                response.Data = await this.todoServices.AddTask(task);
+                response.Data = setTodoDto.ToDoId is null ? await this.todoServices.AddTask(task) : await this.todoServices.UpdateTask(task);
             }
             catch (Exception ex)
             {

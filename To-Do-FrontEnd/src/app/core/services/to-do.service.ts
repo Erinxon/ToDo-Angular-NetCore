@@ -14,4 +14,8 @@ export class ToDoService {
     return this.http.get<ApiResponse<Task[]>>(`/ToDo?UserId=${UserId}&pageNumber=${pageNumber}&pageSize=${pageSize}&type=${type}`)
   }
 
+  postTask(task: Task){
+    return this.http.post<ApiResponse<string>>(`/ToDo`, task);
+  }
+
 }

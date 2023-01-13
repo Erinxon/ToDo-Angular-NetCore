@@ -2,9 +2,9 @@ export interface Task {
     toDoId: string;
     name: string;
     description: string;
-    done: boolean;
+    done?: boolean;
     userId: string;
-    createDate: Date;
-    firstName: string;
-    lastName: string;
+    createDate?: Date;
+    firstName?: string;
+    lastName?: string;
 }

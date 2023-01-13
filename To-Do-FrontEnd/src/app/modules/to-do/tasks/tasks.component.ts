@@ -27,7 +27,7 @@ export class TasksComponent implements OnInit {
   }
 
   private getTasks(){
-    this.toDoService.getTasks(this.auth.getUser()?.userId).subscribe({
+    this.toDoService.getTasks(this.auth.getUser()?.userId, 1, 10).subscribe({
       next: res => {
        this.tasks = res?.data;
       }, error: res => {
@@ -36,12 +36,16 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  openTask(){
+  openTask(task?: Task){
     this.dialog
-    .open(TaskComponent)
+    .open(TaskComponent, {
+      data: { task }
+    })
     .afterClosed()
-    .subscribe((result) => {
-      
+    .subscribe((result: { success: boolean }) => {
+        if(result?.success){
+          this.getTasks();
+        }
     });
   }
 }
