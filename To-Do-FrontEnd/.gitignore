@@ -11,6 +11,12 @@
 npm-debug.log
 yarn-error.log
 
+bin/
+obj/
+.vs/
+.suo
+appsettings.json
+
 # IDEs and editors
 .idea/
 .project
