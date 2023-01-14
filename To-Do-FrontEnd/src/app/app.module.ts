@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiUrlInterceptorInterceptor } from './core/interceptors/api-url-interceptor.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem("token");

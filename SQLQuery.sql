@@ -65,7 +65,7 @@ create view View_User
 as
 select * from Users
 
-alter procedure Sp_Login
+create procedure Sp_Login
 @Email varchar(250),
 @Password varchar(256)
 as
