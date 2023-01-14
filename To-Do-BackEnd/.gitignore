@@ -181,6 +181,11 @@ DocProject/Help/html
 
 # Click-Once directory
 publish/
+To-Do-BackEnd/bin/
+To-Do-BackEnd/obj/
+To-Do-BackEnd/.vs/
+.suo
+To-Do-BackEnd/appsettings.json
 
 # Publish Web Output
 *.[Pp]ublish.xml
