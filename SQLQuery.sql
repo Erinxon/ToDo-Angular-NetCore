@@ -36,7 +36,7 @@ inner join Users as U on T.UserId = U.UserId
 
 
 
-create procedure Sp_GetToDo
+alter procedure Sp_GetToDo
 @UserId UNIQUEIDENTIFIER = null,
 @PageNumber int = 1,
 @PageSize int = 10,
@@ -73,8 +73,38 @@ begin
 	select * from View_User where Email = @Email and Password = @Password
 end
 
-select * from ToDo
-where TodoId = CAST('3fa85f64-5717-4562-b3fc-2c963f66afa6' as UNIQUEIDENTIFIER)
+create procedure Sp_GetCountToDo
+@UserId UNIQUEIDENTIFIER
+as
+begin
+	select count(*) from ToDo where UserId = @UserId
+end
+
+alter procedure Sp_SetToDo
+@ToDoId UNIQUEIDENTIFIER,
+@Name varchar(100),
+@Description varchar(250),
+@Done bit,
+@UserId UNIQUEIDENTIFIER,
+@Type int = 0
+as
+begin
+	if @Type = 0
+	begin
+		insert into ToDo(Name, Description, UserId)
+		values(@Name, @Description, @UserId)
+	end
+	if @Type = 1
+	begin
+		update ToDo set Name = @Name, Description = @Description,
+		Done = @Done
+		where ToDoId = @ToDoId
+	end
+	if @Type = 2
+	begin
+		delete ToDo where UserId = @UserId
+	end
+end
 
 declare @count int = 0
 WHILE(@count <= 500) BEGIN
