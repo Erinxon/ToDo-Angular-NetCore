@@ -1,16 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using To_Do_BackEnd.Models;
+using To_Do_BackEnd.Tools;
 
 namespace To_Do_BackEnd.Services
 {
     public interface ITodoServices
     {
         Task<IEnumerable<ViewTodo>> GetTasks(Guid UserId, int pageNumber, int pageSize, int type);
-        Task<Guid> AddTask(ToDo toDo);
-        Task<Guid> UpdateTask(ToDo toDo);
+        Task AddTask(ToDo toDo);
+        Task UpdateTask(ToDo toDo);
+        Task DeleteTask(Guid id);
+        Task<int> GetCount(Guid UserId);
     }
 
     public class TodoServices : ITodoServices
@@ -24,21 +28,28 @@ namespace To_Do_BackEnd.Services
 
         public async Task<IEnumerable<ViewTodo>> GetTasks(Guid UserId, int pageNumber, int pageSize, int type)
         {
-            return await this.toDoDbContext.ViewTodos.FromSqlRaw($"Sp_GetToDo '{UserId}',{pageNumber},{pageSize},{type}").ToListAsync();
+            return await this.toDoDbContext.ViewTodos.FromSqlRaw($"{ProcedureNames.Sp_GetToDo} '{UserId}',{pageNumber},{pageSize},{type}").ToListAsync();
         }
 
-        public async Task<Guid> AddTask(ToDo toDo)
+        public async Task AddTask(ToDo toDo)
         {
-            await this.toDoDbContext.ToDos.AddAsync(toDo);
-            await this.toDoDbContext.SaveChangesAsync();
-            return toDo.ToDoId;
+            await this.toDoDbContext.Database.ExecuteSqlInterpolatedAsync($"{ProcedureNames.Sp_SetToDo} {toDo.ToDoId}, {toDo.Name}, {toDo.Description}, {toDo.Done}, {toDo.UserId}, {Operation.Insert}");
         }
 
-        public async Task<Guid> UpdateTask(ToDo toDo)
+        public async Task UpdateTask(ToDo toDo)
         {
-            this.toDoDbContext.Entry(toDo).State = EntityState.Modified;
-            await this.toDoDbContext.SaveChangesAsync();
-            return toDo.ToDoId;
+            await this.toDoDbContext.Database.ExecuteSqlInterpolatedAsync($"{ProcedureNames.Sp_SetToDo} {toDo.ToDoId}, {toDo.Name}, {toDo.Description}, {toDo.Done}, {toDo.UserId}, {Operation.Update}");
+        }
+
+        public async Task DeleteTask(Guid id)
+        {
+            await this.toDoDbContext.Database.ExecuteSqlInterpolatedAsync($"{ProcedureNames.Sp_SetToDo} {id}, null, null, null, null, {Operation.Delete}");
+        }
+
+        public async Task<int> GetCount(Guid UserId)
+        {
+            var count = await this.toDoDbContext.ViewTodos.Where(u => u.UserId == UserId).CountAsync();
+            return count;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace To_Do_BackEnd.Controllers
                 }
                 var userResponse = new UserResponse(user)
                 {
-                    Token = GenerateJWT.Generate(user, this.configuration, DateTime.Now.AddMinutes(1))
+                    Token = GenerateJWT.Generate(user, this.configuration, DateTime.Now.AddMinutes(30))
                 };
                 response.Data = userResponse;
             }
