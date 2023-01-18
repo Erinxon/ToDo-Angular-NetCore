@@ -19,6 +19,7 @@
                   <tr>
                     <th>Tarea</th>
                     <th>Descripción</th>
+                    <th>Estado</th>
                     <th class="d-flex justify-content-around">
                         Acciones
                     </th>
@@ -28,8 +29,9 @@
                   <tr *ngFor="let task of tasks">
                     <td>{{task.name}}</td>
                     <td>{{task.description}}</td>
+                    <td>{{task.done ? 'Completada' : 'Pendiente'}}</td>
                     <td class="d-flex justify-content-center gap-2">
-                        <button (click)="openTask(task)" *ngIf="!task?.done"  mat-raised-button color="primary">
+                        <button (click)="openTask(task)" *ngIf="!task?.done"  mat-raised-button color="warn">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
@@ -37,7 +39,7 @@
                                 <line x1="16" y1="5" x2="19" y2="8" />
                               </svg>
                         </button>
-                        <button  (click)="openTask(task)" *ngIf="!task?.done"  mat-raised-button color="primary">
+                        <button  (click)="deleteTask(task)" *ngIf="!task?.done"  mat-raised-button color="accent">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <line x1="4" y1="7" x2="20" y2="7" />
@@ -47,20 +49,35 @@
                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                             </svg>
                         </button>
-                        <button mat-raised-button color="primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler"
-                            [ngClass]="{'icon-tabler-toggle-left' : !task?.done, 'icon-tabler-toggle-right' : task?.done}"
-                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" 
-                             stroke-linecap="round" stroke-linejoin="round">
+                        <button (click)="markAsDone(task)" mat-raised-button color="primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" 
+                              width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" 
+                              stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <circle cx="8" cy="12" r="2" />
-                                <rect x="2" y="6" width="20" height="12" rx="6" />
-                              </svg>
+                                <path d="M5 12l5 5l10 -10" />
+                            </svg>
                         </button>
+                     
                     </td>
                   </tr>
                 </tbody>
               </table>
+              <div class="pagination justify-content-end" *ngIf="tasks.length > 0">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item" [ngClass]="{'disabled': pagination.page === 1}">
+                        <a class="page-link" aria-label="Previous" (click)="previous()">
+                          <span aria-hidden="true">&laquo; Anterior</span>
+                        </a>
+                      </li>
+                      <li class="page-item" [ngClass]="{'disabled': pagination.page === pagination.totalPages}">
+                        <a class="page-link"  aria-label="Next" (click)="next()">
+                          <span aria-hidden="true">Siguiente &raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+              </div>
         </div>
     </div>
 </div>

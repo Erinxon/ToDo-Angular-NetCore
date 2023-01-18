@@ -41,5 +41,20 @@ export class LoginComponent {
       }
     })
   }
+
+  loginAsGuest(){
+    const authModel: AuthModel = {
+      email: '',
+      password: ''
+    };
+    this.authService.login(authModel).subscribe({
+      next: res => {
+        this.authService.setUserAuth(res?.data);
+        this.router.navigate(['/tasks']);
+      },error: res => {
+        this.toastrService.error(res?.error?.message);
+      }
+    })
+  }
   
 }

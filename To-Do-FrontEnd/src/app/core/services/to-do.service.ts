@@ -18,4 +18,8 @@ export class ToDoService {
     return this.http.post<ApiResponse<string>>(`/ToDo`, task);
   }
 
+  delete(id: string){
+    return this.http.delete<ApiResponse<string>>(`/ToDo?Id=${id}`);
+  }
+
 }
