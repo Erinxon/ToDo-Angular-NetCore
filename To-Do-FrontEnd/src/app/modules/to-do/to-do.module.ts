@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskComponent } from './tasks/task/task.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { TaskComponent } from './tasks/task/task.component';
     ToDoRoutingModule, MatDialogModule, MatFormFieldModule,
     MatInputModule, MatFormFieldModule, MatNativeDateModule, MatDatepickerModule, 
     MatButtonModule, FormsModule, ReactiveFormsModule, MatDividerModule, MatDialogModule,
+    SharedModule
   ]
 })
 export class ToDoModule { }

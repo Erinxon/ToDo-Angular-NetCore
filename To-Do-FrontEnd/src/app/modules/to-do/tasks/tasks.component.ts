@@ -95,4 +95,9 @@ export class TasksComponent implements OnInit {
     })
   }
 
+  onPaginateChange(pagination: Pagination){
+    this.pagination = pagination;
+    this.getTasks();
+  }
+
 }

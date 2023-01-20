@@ -19,12 +19,13 @@ namespace To_Do_BackEnd.Models
 
         public virtual DbSet<ToDo> ToDos { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<ViewGetTotalRecord> ViewGetTotalRecords { get; set; }
         public virtual DbSet<ViewTodo> ViewTodos { get; set; }
         public virtual DbSet<ViewUser> ViewUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           
+     
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -54,12 +55,12 @@ namespace To_Do_BackEnd.Models
                     .WithMany(p => p.ToDos)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ToDo__UserId__3E52440B");
+                    .HasConstraintName("FK__ToDo__UserId__47DBAE45");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Users__A9D10534BFBA74DA")
+                entity.HasIndex(e => e.Email, "UQ__Users__A9D1053455EE3624")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasDefaultValueSql("(newid())");
@@ -89,6 +90,13 @@ namespace To_Do_BackEnd.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+            });
+
+            modelBuilder.Entity<ViewGetTotalRecord>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("View_GetTotalRecords");
             });
 
             modelBuilder.Entity<ViewTodo>(entity =>

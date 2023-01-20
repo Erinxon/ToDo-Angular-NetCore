@@ -34,8 +34,6 @@ as
 select T.*,U.FirstName,U.LastName from ToDo as T
 inner join Users as U on T.UserId = U.UserId
 
-
-
 alter procedure Sp_GetToDo
 @UserId UNIQUEIDENTIFIER = null,
 @PageNumber int = 1,
@@ -73,12 +71,6 @@ begin
 	select * from View_User where Email = @Email and Password = @Password
 end
 
-create procedure Sp_GetCountToDo
-@UserId UNIQUEIDENTIFIER
-as
-begin
-	select count(*) from ToDo where UserId = @UserId
-end
 
 alter procedure Sp_SetToDo
 @ToDoId UNIQUEIDENTIFIER,
@@ -104,6 +96,18 @@ begin
 	begin
 		delete ToDo where UserId = @UserId
 	end
+end
+
+create view View_GetTotalRecords
+as
+select count(*) as Total, UserId from ToDo
+group by UserId
+
+create procedure Sp_GetTotalRecords
+@UserId UNIQUEIDENTIFIER
+as
+begin
+	select * from View_GetTotalRecords where UserId = @UserId
 end
 
 declare @count int = 0

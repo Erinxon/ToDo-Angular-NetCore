@@ -28,7 +28,8 @@ namespace To_Do_BackEnd.Services
 
         public async Task<IEnumerable<ViewTodo>> GetTasks(Guid UserId, int pageNumber, int pageSize, int type)
         {
-            return await this.toDoDbContext.ViewTodos.FromSqlRaw($"{ProcedureNames.Sp_GetToDo} '{UserId}',{pageNumber},{pageSize},{type}").ToListAsync();
+            var todos = await this.toDoDbContext.ViewTodos.FromSqlRaw($"{ProcedureNames.Sp_GetToDo} '{UserId}',{pageNumber},{pageSize},{type}").ToListAsync();
+            return todos.AsEnumerable();
         }
 
         public async Task AddTask(ToDo toDo)
@@ -48,8 +49,9 @@ namespace To_Do_BackEnd.Services
 
         public async Task<int> GetCount(Guid UserId)
         {
-            var count = await this.toDoDbContext.ViewTodos.Where(u => u.UserId == UserId).CountAsync();
-            return count;
+            var count = await this.toDoDbContext.ViewGetTotalRecords.FromSqlRaw($"{ProcedureNames.Sp_GetTotalRecords} '{UserId}'").ToListAsync();
+            return (int) count.SingleOrDefault().Total;
+            
         }
     }
 }
