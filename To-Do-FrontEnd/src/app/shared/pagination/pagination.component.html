@@ -1,4 +1,8 @@
-<div class="pagination justify-content-end" *ngIf="lenthRecords > 0">
+<div class="d-flex justify-content-between">
+  <div>
+    <span class="total">Total: </span>{{pagination.total}}
+  </div>
+  <div class="pagination justify-content-end" *ngIf="lenthRecords > 0">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item"  [ngClass]="{'disabled': pagination.page === 1}" (click)="previous()">
@@ -13,4 +17,5 @@
           </li>
         </ul>
       </nav>
+</div>
 </div>

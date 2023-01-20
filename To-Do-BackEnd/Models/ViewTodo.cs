@@ -13,6 +13,7 @@ namespace To_Do_BackEnd.Models
         public bool Done { get; set; }
         public Guid UserId { get; set; }
         public DateTime CreateDate { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }

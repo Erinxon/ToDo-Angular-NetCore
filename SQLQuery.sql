@@ -29,10 +29,11 @@ values('Erinxon','Santana',1,'erinxons@gmail.com','123456')
 insert into ToDo(Name, Description, UserId)
 values('Compra del Mes','Ir al bravo a comprar los alimentos que se van a consumir en el mes de enero','E398C0AA-F147-4892-8CFB-6111C2CFDC0F')
 
-create view View_Todo
+alter view View_Todo
 as
 select T.*,U.FirstName,U.LastName from ToDo as T
 inner join Users as U on T.UserId = U.UserId
+
 
 alter procedure Sp_GetToDo
 @UserId UNIQUEIDENTIFIER = null,
@@ -46,14 +47,14 @@ begin
 	if(@Type = 0)
 	begin
 		select * from View_Todo
-		order by CreateDate asc
+		order by Id desc
 		OFFSET @SkipRows ROWS 
 		FETCH NEXT @PageSize ROWS ONLY
 	end
 	else
 	begin
 		select * from View_Todo where UserId = @UserId
-		order by CreateDate asc
+		order by Id desc
 		OFFSET @SkipRows ROWS 
 		FETCH NEXT @PageSize ROWS ONLY
 	end
@@ -111,8 +112,11 @@ begin
 end
 
 declare @count int = 0
-WHILE(@count <= 500) BEGIN
+WHILE(@count <= 100) BEGIN
 	insert into ToDo(Name, Description, UserId)
 	values('Task: ' + CAST(@count as varchar(100)),'Task: ' + CAST(@count as varchar(100)),'c3a0cb1c-2092-43ab-9ed5-dea181dc12e5')
     set @count = @count + 1
 END
+
+alter table ToDo
+add  Id int identity

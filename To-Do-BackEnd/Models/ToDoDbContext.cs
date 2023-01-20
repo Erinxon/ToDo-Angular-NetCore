@@ -25,7 +25,7 @@ namespace To_Do_BackEnd.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-     
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace To_Do_BackEnd.Models
 
             modelBuilder.Entity<ToDo>(entity =>
             {
+                entity.HasKey(e => e.ToDoId)
+                    .HasName("PK__ToDo__21D08D00A9B55C60");
+
                 entity.ToTable("ToDo");
 
                 entity.Property(e => e.ToDoId).HasDefaultValueSql("(newid())");
@@ -46,6 +49,8 @@ namespace To_Do_BackEnd.Models
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100)
@@ -55,12 +60,12 @@ namespace To_Do_BackEnd.Models
                     .WithMany(p => p.ToDos)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ToDo__UserId__47DBAE45");
+                    .HasConstraintName("FK__ToDo__UserId__3E52440B");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Users__A9D1053455EE3624")
+                entity.HasIndex(e => e.Email, "UQ__Users__A9D10534BFBA74DA")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasDefaultValueSql("(newid())");

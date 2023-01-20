@@ -23,7 +23,7 @@ export class HeaderComponent {
       cancelButtonColor: '#3f51b5',
       cancelButtonText: 'No',
       confirmButtonText: 'Si, Cerrar'
-    }).then((result) => {
+    }).then((result: { isConfirmed: boolean}) => {
       if (result.isConfirmed) {
         this.authService.logout();
       }
