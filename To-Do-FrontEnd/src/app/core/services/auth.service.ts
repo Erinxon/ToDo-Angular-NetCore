@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { ApiResponse } from '../models/api-response.model';
-import { AuthModel } from '../models/auth.model';
+import { AuthModel, RegisterModel } from '../models/auth.model';
 import { AuthResponse, UserResponse } from '../models/user-response.model';
 import { LocalStorageService } from './local-storage.service';
 
@@ -24,6 +24,10 @@ export class AuthService {
 
   login(authModel: AuthModel){
     return this.http.post<ApiResponse<AuthResponse>>('/auth', authModel);
+  }
+
+  register(registerModel: RegisterModel){
+    return this.http.post<ApiResponse<string>>('/auth/Create', registerModel);
   }
 
   isAutehticated(): Observable<boolean> {

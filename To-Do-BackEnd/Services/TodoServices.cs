@@ -50,7 +50,7 @@ namespace To_Do_BackEnd.Services
         public async Task<int> GetCount(Guid UserId)
         {
             var count = await this.toDoDbContext.ViewGetTotalRecords.FromSqlRaw($"{ProcedureNames.Sp_GetTotalRecords} '{UserId}'").ToListAsync();
-            return (int) count.SingleOrDefault().Total;
+            return (int) count.SingleOrDefault()?.Total;
             
         }
     }

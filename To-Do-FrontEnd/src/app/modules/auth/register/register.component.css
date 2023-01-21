@@ -1,0 +1,29 @@
+.card-header{
+    background-color: #3F51B5 !important;
+    color: #ffffff !important;
+    padding: 1.3em !important;
+    font-size: medium;
+}
+
+.card{
+    border-color: #3F51B5 !important;
+}
+
+.container-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.p-element{
+    padding-right: 0px !important;
+}
+
+.p-button-link{
+    text-decoration: none;
+    color: #3F51B5;
+    font-weight: 500;
+}

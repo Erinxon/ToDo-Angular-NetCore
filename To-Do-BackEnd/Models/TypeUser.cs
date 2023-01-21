@@ -2,7 +2,7 @@
 {
     public enum TypeUser
     {
-        Registered   = 1,
+        Registered  = 1,
         Guest
     }
 }

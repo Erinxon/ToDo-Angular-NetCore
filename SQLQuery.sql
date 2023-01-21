@@ -111,12 +111,14 @@ begin
 	select * from View_GetTotalRecords where UserId = @UserId
 end
 
-declare @count int = 0
+declare @count int = 1
 WHILE(@count <= 100) BEGIN
 	insert into ToDo(Name, Description, UserId)
-	values('Task: ' + CAST(@count as varchar(100)),'Task: ' + CAST(@count as varchar(100)),'c3a0cb1c-2092-43ab-9ed5-dea181dc12e5')
+	values('Task: ' + CAST(@count as varchar(100)),'Task: ' + CAST(@count as varchar(100)),'E398C0AA-F147-4892-8CFB-6111C2CFDC0F')
     set @count = @count + 1
 END
+
+delete  Users
 
 alter table ToDo
 add  Id int identity

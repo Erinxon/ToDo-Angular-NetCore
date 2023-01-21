@@ -1,1 +1,83 @@
-<p>register works!</p>
+<div class="container-login">
+    <div>
+        <div class="col-md-12 mb-3 ">
+            <div class="card">
+                <div class="card-header">
+                    Registrate
+                </div>
+                <div class="card-body">
+                    <form class="row" [formGroup]="form">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Nombre</mat-label>
+                                <input type="text" formControlName="firstName"  matInput placeholder="Email">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Apellido</mat-label>
+                                <input type="text" formControlName="lastName" matInput placeholder="Password">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <input type="text" formControlName="email" matInput placeholder="Password">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Contraseña</mat-label>
+                                <input type="password" formControlName="password" matInput placeholder="Password">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Repetir Contraseña</mat-label>
+                                <input type="password" formControlName="passwordConfirmation" matInput placeholder="Password">
+                            </mat-form-field>
+                            <mat-error *ngIf="form.get('passwordConfirmation')?.hasError('notSame')">Las contraseñas no coinciden</mat-error>
+                        </div>
+                        <div class="col-md-12">
+                            <button mat-raised-button color="primary" 
+                            [disabled]="form.invalid"
+                            (click)="register()"
+                                class="w-100 pt-2 pb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" 
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    <path d="M16 11h6m-3 -3v6" />
+                                  </svg>
+                                Registrarse
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+            <a [routerLink]="['/tasks']"   
+                routerLinkActive="router-link-active" 
+                class="p-button-link"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-door-enter" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M13 12v.01" />
+                    <path d="M3 21h18" />
+                    <path d="M5 21v-16a2 2 0 0 1 2 -2h6m4 10.5v7.5" />
+                    <path d="M21 7h-7m3 -3l-3 3l3 3" />
+                  </svg>Entrar como invitado</a>
+            <a [routerLink]="['/auth/login']"  
+            routerLinkActive="router-link-active" 
+            class="p-button-link">¿Ya tienes cuenta? Inicia Sesión
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <circle cx="9" cy="7" r="4" />
+                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                <path d="M16 11h6m-3 -3v6" />
+              </svg></a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
