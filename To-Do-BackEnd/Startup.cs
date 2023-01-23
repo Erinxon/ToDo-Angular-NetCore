@@ -18,6 +18,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using To_Do_BackEnd.Models;
 using To_Do_BackEnd.Services;
+using To_Do_BackEnd.Tools;
 
 namespace To_Do_BackEnd
 {
@@ -47,20 +48,7 @@ namespace To_Do_BackEnd
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "To_Do_BackEnd", Version = "v1" });
             });
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options => {
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuer = true,
-                       ValidateAudience = true,
-                       ValidateLifetime = true,
-                       ValidateIssuerSigningKey = true,
-                       ValidIssuer = Configuration["Jwt:Issuer"],
-                       ValidAudience = Configuration["Jwt:Audience"],
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                   };
-            });
+            services.AddAuthenticationJWT(Configuration);
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ITodoServices, TodoServices>();
             services.AddTransient<IAuthServices, AuthServices>();

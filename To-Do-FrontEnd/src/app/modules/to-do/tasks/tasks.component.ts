@@ -31,6 +31,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTasks();
+    this.isGuestUser();
   }
 
   private getTasks(){
@@ -98,6 +99,19 @@ export class TasksComponent implements OnInit {
   onPaginateChange(pagination: Pagination){
     this.pagination = pagination;
     this.getTasks();
+  }
+
+  isGuestUser(){
+    const currentDate = new Date();
+    const exp = new Date(this.auth.getUser().exp * 1000);
+    const difference = exp?.getTime() - currentDate.getTime(); 
+    const resultInMinutes = Math.round(difference / 60000);
+    console.log(resultInMinutes * 60)
+    const miniseconds = (resultInMinutes * 60) * 1000;
+    console.log(miniseconds)
+    setTimeout(() => {
+      this.toastrService.warning(`Esta cuenta se eliminara en ${resultInMinutes} minutos`);
+    }, miniseconds)
   }
 
 }

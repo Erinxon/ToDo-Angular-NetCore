@@ -3,6 +3,7 @@ export interface UserResponse {
     firstName: string;
     lastName: string;
     typeUser: number;
+    exp: number;
     email: string;
     status: boolean;
     createDate: Date;

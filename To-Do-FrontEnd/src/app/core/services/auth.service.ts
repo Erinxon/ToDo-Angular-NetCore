@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { ApiResponse } from '../models/api-response.model';
 import { AuthModel, RegisterModel } from '../models/auth.model';
+import { GuestUser } from '../models/guestUser.model';
 import { AuthResponse, UserResponse } from '../models/user-response.model';
 import { LocalStorageService } from './local-storage.service';
 
@@ -53,6 +54,10 @@ export class AuthService {
     this.localStorageService.removeItem('token');
     this.userAuth.next(null!);
     this.router.navigate(['auth','login']);
+  }
+
+  generateGuestUsers(){
+    return this.http.get<ApiResponse<GuestUser>>(`/auth/GenerateGuestUsers`);
   }
 
 }
