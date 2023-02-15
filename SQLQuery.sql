@@ -46,7 +46,7 @@ begin
 
 	if(@Type = 0)
 	begin
-		select * from View_Todo
+		select * from View_Todo where UserId = @UserId
 		order by Id desc
 		OFFSET @SkipRows ROWS 
 		FETCH NEXT @PageSize ROWS ONLY
@@ -59,6 +59,9 @@ begin
 		FETCH NEXT @PageSize ROWS ONLY
 	end
 end
+
+
+
 
 create view View_User
 as
@@ -119,6 +122,9 @@ WHILE(@count <= 100) BEGIN
 END
 
 delete  Users
+truncate table ToDo
+go
+delete Users
 
 alter table ToDo
 add  Id int identity

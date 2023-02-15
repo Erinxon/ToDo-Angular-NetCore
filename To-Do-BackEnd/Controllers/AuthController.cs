@@ -39,10 +39,17 @@ namespace To_Do_BackEnd.Controllers
                     response.Message = "Usuario o Contraseña Incorrecta";
                     return Unauthorized(response);
                 }
+<<<<<<< HEAD
                 var expiresTime = user.TypeUser == (int)TypeUser.Guest ? DateTime.Now.AddMinutes(30) : DateTime.Now.AddDays(1);
                 var userResponse = new UserResponse(user)
                 {
                     Token = GenerateJWT.Generate(user, this.configuration, expiresTime)
+=======
+                DateTime expires = user.TypeUser == (int) TypeUser.Registered ? DateTime.UtcNow.AddMinutes(1) : DateTime.UtcNow.AddMinutes(2);
+                var userResponse = new UserResponse(user)
+                {
+                    Token = GenerateJWT.Generate(user, this.configuration, expires)
+>>>>>>> 955723f5365823d6107b728be3779b84912cf224
                 };
                 response.Data = userResponse;
             }
