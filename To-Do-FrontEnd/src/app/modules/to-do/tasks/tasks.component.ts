@@ -31,7 +31,6 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTasks();
-    this.isGuestUser();
   }
 
   private getTasks(){
